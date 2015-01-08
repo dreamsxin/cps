@@ -1,0 +1,188 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><?= $title ?></div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form class="form" role="form" method="post">
+			<div class='row'>
+				<div class="col-md-3 col-lg-2">
+					<div class="form-group">
+						<label class="control-label">CP 名称</label>
+						<input name="cpname" type="text" class="form-control" required placeholder="CP 名称" value="<?= $this->getPost('cpname') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">游戏名称</label>
+						<input name="gamename" type="text" class="form-control" required placeholder="游戏名称" value="<?= $this->getPost('gamename') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">渠道号</label>
+						<input name="channel" type="text" class="form-control" required placeholder="渠道号" value="<?= $this->getPost('channel') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">产品名称</label>
+						<input name="project" type="text" class="form-control" required placeholder="产品名称" value="<?= $this->getPost('project') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">厂商名称</label>
+						<input name="vendor" type="text" class="form-control" required placeholder="厂商名称" value="<?= $this->getPost('vendor') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">日期</label>
+						<input name="date" type="text" class="form-control" required placeholder="日期" value="<?= $this->getPost('date') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">新增用户</label>
+						<input name="newusers" type="text" class="form-control" required placeholder="新增用户" value="<?= $this->getPost('newusers') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">付费金额</label>
+						<input name="payamount" type="text" class="form-control" required placeholder="付费金额" value="<?= $this->getPost('payamount') ?>">
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-2">
+					<div class="form-group">
+						<label class="control-label">厂商收益</label>
+						<input name="vendorearnings" type="text" class="form-control" required placeholder="厂商收益" value="<?= $this->getPost('vendorearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CP收益</label>
+						<input name="cpearnings" type="text" class="form-control" required placeholder="CP收益" value="<?= $this->getPost('cpearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">趣源收益</label>
+						<input name="qyearnings" type="text" class="form-control" required placeholder="趣源收益" value="<?= $this->getPost('qyearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">厂商分成比列</label>
+						<input name="vendorsharescale" type="text" class="form-control" required placeholder="厂商分成比列" value="<?= $this->getPost('vendorsharescale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后的新增用户</label>
+						<input name="newusers2" type="text" class="form-control" required placeholder="调整后的新增用户" value="<?= $this->getPost('newusers2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后的付费金额</label>
+						<input name="payamount2" type="text" class="form-control" required placeholder="调整后的付费金额" value="<?= $this->getPost('payamount2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">付费金额调整系数</label>
+						<input name="payamountscale" type="text" class="form-control" required placeholder="付费金额调整系数" value="<?= $this->getPost('payamountscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CPA新增用户调整系数</label>
+						<input name="cpanewuserscale" type="text" class="form-control" required placeholder="CPA新增用户调整系数" value="<?= $this->getPost('cpanewuserscale') ?>">
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-2">
+					<div class="form-group">
+						<label class="control-label">厂商调整系数</label>
+						<input name="vendorscale" type="text" class="form-control" required placeholder="厂商调整系数" value="<?= $this->getPost('vendorscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CPA单价</label>
+						<input name="cpaunitprice" type="text" class="form-control" required placeholder="CPA单价" value="<?= $this->getPost('cpaunitprice') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后厂商收益</label>
+						<input name="vendorearnings2" type="text" class="form-control" required placeholder="调整后厂商收益" value="<?= $this->getPost('vendorearnings2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后趣源收益</label>
+						<input name="qyearnings2" type="text" class="form-control" required placeholder="调整后趣源收益" value="<?= $this->getPost('qyearnings2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后CP收益</label>
+						<input name="cpearnings2" type="text" class="form-control" required placeholder="调整后CP收益" value="<?= $this->getPost('cpearnings2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CP调整系数</label>
+						<input name="cpscale" type="text" class="form-control" required placeholder="CP调整系数" value="<?= $this->getPost('cpscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CP分成比列</label>
+						<input name="cpsharescale" type="text" class="form-control" required placeholder="CP分成比列" value="<?= $this->getPost('cpsharescale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">支付方</label>
+						<input name="payer" type="text" class="form-control" required placeholder="支付方" value="<?= $this->getPost('payer') ?>">
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-2">
+					<div class="form-group">
+						<label class="control-label">支付通道</label>
+						<input name="paychannels" type="text" class="form-control" required placeholder="支付通道" value="<?= $this->getPost('paychannels') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">支付通道成本比例</label>
+						<input name="paychannelscostscale" type="text" class="form-control" required placeholder="支付通道成本比例" value="<?= $this->getPost('paychannelscostscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">坏账比例</label>
+						<input name="baddebtscale" type="text" class="form-control" required placeholder="坏账比例" value="<?= $this->getPost('baddebtscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">支付方税金比例</label>
+						<input name="payertaxscale" type="text" class="form-control" required placeholder="支付方税金比例" value="<?= $this->getPost('payertaxscale') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">通道成本</label>
+						<input name="paychannelscost" type="text" class="form-control" required placeholder="通道成本" value="<?= $this->getPost('paychannelscost') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">坏账</label>
+						<input name="baddebt" type="text" class="form-control" required placeholder="坏账" value="<?= $this->getPost('baddebt') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">支付方税金</label>
+						<input name="payertax" type="text" class="form-control" required placeholder="支付方税金" value="<?= $this->getPost('payertax') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">渠道接口人</label>
+						<input name="channelinterface " type="text" class="form-control" required placeholder="渠道接口人" value="<?= $this->getPost('channelinterface') ?>">
+					</div>
+					
+				</div>
+				<div class="col-md-3 col-lg-2">
+					<div class="form-group">
+						<label class="control-label">可分配总收益</label>
+						<input name="payertax" type="text" class="form-control" required placeholder="可分配总收益" value="<?= $this->getPost('totaldistributableearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">CP可分配收益</label>
+						<input name="payertax" type="text" class="form-control" required placeholder="CP可分配收益" value="<?= $this->getPost('cpdistributableearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">厂商可分配收益</label>
+						<input name="payertax" type="text" class="form-control" required placeholder="厂商可分配收益" value="<?= $this->getPost('vendordistributableearnings') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后CP可分配收益</label>
+						<input name="cpdistributableearnings2" type="text" class="form-control" required placeholder="调整后CP可分配收益" value="<?= $this->getPost('cpdistributableearnings2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">调整后厂商可分配收益</label>
+						<input name="vendordistributableearnings2" type="text" class="form-control" required placeholder="调整后厂商可分配收益" value="<?= $this->getPost('vendordistributableearnings2') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">备注</label>
+						<input name="remark" type="text" class="form-control" required placeholder="备注" value="<?= $this->getPost('remark') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">结算方式</label>
+						<input name="settlement" type="text" class="form-control" required placeholder="结算方式" value="<?= $this->getPost('settlement') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">付费用户数</label>
+						<input name="payusers" type="text" class="form-control" required placeholder="付费用户数" value="<?= $this->getPost('payusers') ?>">
+					</div>
+					<div class="form-group">
+						<label class="control-label">付费金额（自己统计）</label>
+						<input name="ownpayamount" type="text" class="form-control" required placeholder="付费金额（自己统计）" value="<?= $this->getPost('ownpayamount') ?>">
+					</div>
+				</div>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-default">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

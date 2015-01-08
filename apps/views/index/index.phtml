@@ -1,0 +1,34 @@
+<div class="banner-content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 col-sm-7">
+				<h1><strong>提升</strong> 商业价值</h1>
+				<p>随时随地获取您想要的！</p>
+				<ul class="banner-list">
+					<li><i class="glyphicon glyphicon-ok"></i>随时随刻，便捷</li>
+					<li><i class="glyphicon glyphicon-ok"></i>想你所想，智能</li>
+					<li><i class="glyphicon glyphicon-ok"></i>多重防护，安全</li>
+					<li><i class="glyphicon glyphicon-ok"></i>全面的数据统计分析，高效</li>
+					<li><i class="glyphicon glyphicon-ok"></i>顺应潮流，开放</li>
+				</ul>
+			</div>
+			<div class="col-lg-4 col-md-4 col-md-offset-1 col-sm-5">
+				<div class="banner-form">
+					<div class="form-body">
+						<p>使用您的帐户登录</p>
+						<form class="form" method="post" action="<?= $this->url->get('auth/index') ?>">
+							<div class="form-group">
+								<input name="username" type="text" class="form-control" required placeholder="您的账户">
+							</div>
+							<div class="form-group">
+								<input name="password" type="password" class="form-control" required placeholder="您的密码">
+							</div>
+							<button type="submit" class="btn btn-default btn-submit">登录</button>
+							<a class="btn btn-link center-block" href="<?= $this->url->get('auth/reg') ?>">创建账户</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

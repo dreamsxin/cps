@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+	<div class="panel-heading">导入</div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form class="form" role="form" method="post" enctype="multipart/form-data">
+			<div class='row'>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label">CSV 文件</label>
+						<input name="cpname" type="file" required>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-default">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,191 @@
+body { width: 100%; min-height: 100%; font-family: "Open Sans", "Raleway", Lucida Sans Unicode, Verdana, Helvetica, sans-serif; font-size: 14px; line-height: 23px; color: #7a7a7a; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 300; font-family: "Raleway", Lucida Sans Unicode, "Helvetica Neue", Helvetica,Arial,sans-serif; color: #1a1a1a; transition: all .50s ease-in-out; -moz-transition: all .50s ease-in-out; -webkit-transition: all .50s ease-in-out;}
+h1, h2, h3, h4, h5, h6 { margin-top: 0;  margin-bottom: 10px;}
+
+h1 {font-size: 44px;}
+h2 {font-weight: 700; margin-bottom: 20px; }
+h3 {}
+h4 {font-size: 17px; font-weight: 700; color: #2d2d2d;}
+
+p { margin-bottom: 20px; line-height: 24px;}
+
+a {-webkit-transition: all 150ms ease-in; -moz-transition: all 150ms ease-in; -o-transition: all 150ms ease-in; transition: all 150ms ease-in; color: #00a8d6;}
+a:hover, a:focus { text-decoration: none; color: #007DA0; outline: none; } 
+
+ul { margin: 0; padding: 0; list-style: none;}
+
+::-moz-selection { text-shadow: none; background: #08b4da; color: #FFF;}
+::selection { text-shadow: none; background: #08b4da; color: #FFF; }
+
+img::selection { background: 0 0;}
+img::-moz-selection { background: 0 0;}
+
+hr {margin-top: 30px; margin-bottom: 40px; border-top: 1px solid #EFEFEF;}
+body { webkit-tap-highlight-color: rgba(255,255,255,.2);}
+
+form {margin-bottom: 0;}
+
+.navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: medium none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 15px 0;
+    transition: background 0.5s ease-in-out 0s, padding 0.5s ease-in-out 0s;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 0;
+}
+.navbar-brand {
+	height:auto;
+}
+.btn {
+    border-radius: 0;
+    font-weight: bold;
+    padding: 15px 35px;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.btn-submit {
+    background-color: #08b4da;
+    border: 2px solid #08b4da;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    padding: 11px;
+    width: 100%;
+}
+
+.header {
+	background: url("../img/blur.png") repeat fixed 0 0 / cover #1a1a1a;
+	height: 100%;
+	padding-bottom: 70px;
+}
+.text-logo {
+    margin-top: 5px;
+}
+.text-logo i {
+    margin-right: 10px;
+}
+.blue {
+    color: #08b4da;
+}
+.banner-content {
+    clear: both;
+    padding-top: 40px;
+}
+.banner-content h1 {
+    color: #fff;
+    font-size: 50px;
+}
+.banner-content h2 {
+    color: #fff;
+}
+.banner-content p {
+    color: rgba(255, 255, 255, 0.7);
+}
+.banner-list {
+    margin-bottom: 20px;
+}
+.banner-list li {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+}
+.banner-list li i {
+    color: #08b4da;
+    margin-right: 10px;
+}
+.banner-form {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.banner-form .form-control {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #08b4da;
+    height: auto;
+    margin-bottom: 15px;
+    outline: medium none;
+    padding: 13px 15px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.banner-form .has-error .form-control {
+	border: 1px solid #a94442;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.banner-form .alert-danger {
+    background-color: rgba(242, 222, 222, 0.5);
+    border: medium none;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.form-title {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 25px 0;
+    text-align: center;
+}
+.form-title h2 {
+    font-size: 22px;
+    margin-bottom: 0;
+}
+.form-body {
+    padding: 30px;
+}
+.form-body p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer h3 {
+    color: #fff;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.footer p, .footer a {
+    color: #adadad;
+    margin-bottom: 10px;
+}
+.footer li {
+    font-size: 14px;
+    padding: 3px 0;
+}
+.footer i {
+    color: #f8f8f8;
+}
+.footer-top {
+    background-color: #2b2b2b;
+    padding: 70px 0;
+}
+.contact-list li {
+    color: #adadad;
+    margin-bottom: 5px;
+}
+.contact-list i {
+    margin-right: 15px;
+}
+.social li {
+	background: none repeat scroll 0 0 #204385;
+    border-radius: 3px;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: center;
+    transition: background-color 400ms ease-out 0.2s;
+    width: 35px;
+}
+.social li.red {
+	background: none repeat scroll 0 0 #e22d24;
+}
+.footer-sub {
+    background-color: #242424;
+    padding: 30px 0;
+}

@@ -1,0 +1,33 @@
+<div class="banner-content">
+	<div class="container">
+		<div class="row">
+			<div class="banner-form">
+				<div class="form-title">
+					<h2>一个帐户，畅享 优途 所有服务！</h2>
+				</div>
+				<div class="form-body">
+					<p>登录您的 优途 帐户</p>
+					<p><?php $this->flashSession->output() ?></p>
+					<form class="form" method="post" action="<?= $this->url->get('auth/index') ?>">
+						<div class="form-group">
+							<input name="username" type="text" class="form-control" required placeholder="您的账户">
+						</div>
+						<div class="form-group">
+							<input name="password" type="password" class="form-control" required placeholder="您的密码">
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6">
+									<button type="submit" class="btn btn-default btn-submit">立即登录</button>
+								</div>
+								<div class="col-sm-6">
+									<a class="btn btn-link" href="<?= $this->url->get('auth/reg') ?>">创建账户</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
