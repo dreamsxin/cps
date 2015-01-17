@@ -1,7 +1,26 @@
 <div class="panel panel-default">
 	<div class="panel-heading">CPS数据</div>
 	<div class="panel-body">
-		<p><?php $this->flashSession->output() ?></p>
+		<form class="form-inline" method="get" action="#">
+			<div class="form-group">
+				<?php
+				echo $this->tag->selectStatic(
+				    array(
+					't',
+					$labels,
+					'value' => $this->getQuery('t'),
+					'class' => 'form-control'
+				    )
+				);
+				?>
+			</div>
+			<div class="input-group">
+				<input type="text" placeholder="搜索..." class="form-control" name="q" value="<?= $this->getQuery('q') ?>">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</span>
+			</div>
+		</form>
 	</div>
 	<table class="table">
 		<thead>
@@ -9,6 +28,7 @@
 				<?php foreach ($labels as $label) { ?>
 					<th><?= $label ?></th>
 				<?php } ?>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,6 +37,12 @@
 					<?php foreach ($labels as $key => $label) { ?>
 						<td><?= $item->{$key} ?></td>
 					<?php } ?>
+					<td>
+					<?php if ($this->session->get('group') == '超级管理员') { ?>
+					<a class="btn btn-default" href="<?= $this->url->get('manage/cps/edit/'.$item->getIdString()) ?>">编辑</a>
+					<a class="btn btn-default" href="<?= $this->url->get('manage/cps/del/'.$item->getIdString()) ?>">删除</a>
+					<?php } ?>
+					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
