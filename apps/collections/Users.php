@@ -41,6 +41,7 @@ class Users extends \Phalcon\Mvc\Collection {
 			'email' => '邮箱地址',
 			'company' => '公司',
 			'group' => '角色',
+			'channel' => '渠道号',
 		);
 	}
 

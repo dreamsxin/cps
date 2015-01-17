@@ -46,10 +46,37 @@ class Cps extends \Phalcon\Mvc\Collection {
 			'渠道接口人' => '渠道接口人',
 		);
 	}
-	
-	public static function labels() {
-		$my = new self();
-		return $my->getColumnMap();
+
+	public static function labels($group = NULL) {
+		if ($group == '信息费用户') {
+			return array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+			);
+		} elseif ($group == 'CPS用户') {
+			return array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+			);
+		} elseif ($group == 'CPA用户') {
+			return array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+				'CPA单价' => 'CPA单价',
+			);
+		} else {
+			$my = new self();
+			return $my->getColumnMap();
+		}
 	}
 
 }

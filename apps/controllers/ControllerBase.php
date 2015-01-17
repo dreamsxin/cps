@@ -9,11 +9,16 @@ abstract class ControllerBase extends \Phalcon\Mvc\Controller {
 		\Phalcon\Tag::setTitle('CPS 数据中心');
 	}
 
-	public function getUser() {
+	public function getUser($field = NULL) {
 		if ($this->session->get('username')) {
 			if (!self::$user) {
 				self::$user = Users::findFirstByUsername($this->session->get('username'));
+				$this->session->sets(self::$user->toArray());
 			}
+		}
+		
+		if ($field && self::$user) {
+			return self::$user->{$field};
 		}
 		return self::$user;
 	}

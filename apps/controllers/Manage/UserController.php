@@ -7,7 +7,7 @@ class UserController extends ControllerBase {
 		parent::beforeExecuteRoute($dispatcher);
 		
 		if ($this->session->get('group') != '超级管理员') {
-			$this->redirect('manager/index/index', '您没有超级管理员权限');
+			$this->redirect('manage/index/index', '您没有超级管理员权限');
 		}
 	}
 

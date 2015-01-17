@@ -27,6 +27,11 @@ class AuthController extends ControllerBase {
 			}
 		}
 	}
+	
+	public function logoutAction() {
+		$this->session->destroy();
+		$this->redirect('index/index');
+	}
 
 	public function regAction() {
 		\Phalcon\Tag::appendTitle('注册');

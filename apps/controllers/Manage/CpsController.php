@@ -8,14 +8,28 @@ class CpsController extends ControllerBase {
 	}
 	
 	public function indexAction($page = 0) {
-		$this->view->labels = \Cps::labels();
-		$this->view->result = \Cps::find(array(
-			'limit' => 50,
-			'skip' => (int)$page * 50
-		));
+		$group = $this->getUser('group');
+		$this->view->labels = \Cps::labels($group);
+		$channel = $this->getUser('channel');
+		if (!empty($channel)) {
+			$this->view->result = \Cps::find(array(
+				array('渠道号' => $channel),
+				'limit' => 50,
+				'skip' => (int)$page * 50
+			));
+		} else {
+			$this->view->result = \Cps::find(array(
+				'limit' => 50,
+				'skip' => (int)$page * 50
+			));
+		}
 	}
 	
 	public function addAction() {
+		if ($this->session->get('group') != '超级管理员') {
+			$this->redirect('manage/index/index', '您没有超级管理员权限');
+		}
+
 		\Phalcon\Tag::appendTitle('录入');
 		if ($this->request->isPost()) {
 		}
@@ -26,6 +40,10 @@ class CpsController extends ControllerBase {
 	}
 	
 	public function importAction() {
+		if ($this->session->get('group') != '超级管理员') {
+			$this->redirect('manage/index/index', '您没有超级管理员权限');
+		}
+
 		\Phalcon\Tag::appendTitle('导入');
 		if ($this->request->hasFiles()) {
 			foreach ($this->request->getUploadedFiles() as $file) {
