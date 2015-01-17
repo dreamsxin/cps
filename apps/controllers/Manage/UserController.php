@@ -15,12 +15,19 @@ class UserController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('用户管理');
 	}
 	
-	public function indexAction($page = 0) {
+	public function indexAction($page = 1) {
 		$this->view->labels = \Users::labels();
-		$this->view->result = \Users::find(array(
-			'limit' => 50,
-			'skip' => (int)$page * 50
-		));
+		$data = \Users::find();
+
+		$paginator = new \Phalcon\Paginator\Adapter\Model(
+			array(
+				"data" => $data,
+				"limit"=> 50,
+				"page" => $page
+			)
+		);
+
+		$this->view->page = $paginator->getPaginate();
 	}
 	
 	public function addAction() {

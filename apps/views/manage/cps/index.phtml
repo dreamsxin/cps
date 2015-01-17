@@ -12,13 +12,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($result as $items) { ?>
+			<?php foreach ($page->items as $item) { ?>
 				<tr>
 					<?php foreach ($labels as $key => $label) { ?>
-						<td><?= $items->{$key} ?></td>
+						<td><?= $item->{$key} ?></td>
 					<?php } ?>
 				</tr>
 			<?php } ?>
 		</tbody>
 	</table>
+	<?php $this->partial("shared/paginator", array('url' => 'manage/cps/index/', 'param' => NULL)) ?>
 </div>

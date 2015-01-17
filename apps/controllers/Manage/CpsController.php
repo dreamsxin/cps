@@ -7,22 +7,27 @@ class CpsController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('CPS 数据');
 	}
 	
-	public function indexAction($page = 0) {
+	public function indexAction($page = 1) {
 		$group = $this->getUser('group');
 		$this->view->labels = \Cps::labels($group);
 		$channel = $this->getUser('channel');
 		if (!empty($channel)) {
-			$this->view->result = \Cps::find(array(
-				array('渠道号' => $channel),
-				'limit' => 50,
-				'skip' => (int)$page * 50
+			$data = \Cps::find(array(
+				array('渠道号' => $channel)
 			));
 		} else {
-			$this->view->result = \Cps::find(array(
-				'limit' => 50,
-				'skip' => (int)$page * 50
-			));
+			$data = \Cps::find();
 		}
+
+		$paginator = new \Phalcon\Paginator\Adapter\Model(
+			array(
+				"data" => $data,
+				"limit"=> 50,
+				"page" => $page
+			)
+		);
+
+		$this->view->page = $paginator->getPaginate();
 	}
 	
 	public function addAction() {

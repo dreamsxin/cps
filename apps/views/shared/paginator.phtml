@@ -1,0 +1,18 @@
+<div class="pagination">
+    <ul class="pagination">
+		<li><a href="<?= $this->url->get($url . '1'.$param) ?>">第一页</a></li>
+		<li><a href="<?= $this->url->get($url .  $page->before.$param) ?>">上一页</a></li>
+
+		<? for ($i = 1; $i <= $page->total_pages; $i++): ?>
+		<? if ($i == $page->current): ?>
+		<li class="active"><a href="#"><?= $i ?></a></li>
+		<? else: ?>
+		<li><a href="<?= $this->url->get($url .  $i.$param) ?>"><?= $i ?></a></li>
+		<? endif ?>
+		<? endfor ?>
+
+		<li><a href="<?= $this->url->get($url . $page->next.$param) ?>">下一页</a></li>
+
+		<li><a href="<?= $this->url->get($url . $page->last.$param) ?>">最后一页</a></li>
+	</ul>
+</div>

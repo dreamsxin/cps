@@ -27,7 +27,7 @@ class Users extends \Phalcon\Mvc\Collection {
 			return FALSE;
 		}
 
-		if ($this->username == 'admin') {		var_dump($this->group);exit;
+		if ($this->username == 'admin') {
 			$this->group = '超级管理员';
 		}
 	}
