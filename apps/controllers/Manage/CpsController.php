@@ -107,6 +107,10 @@ class CpsController extends ControllerBase {
 	}
 	
 	public function editAction($id) {
+		if ($this->session->get('group') != '超级管理员') {
+			$this->redirect('manage/index/index', '您没有超级管理员权限');
+		}
+
 		\Phalcon\Tag::appendTitle('CPS 编辑');
 		$errors = array();
 		$cps = \Cps::findFirst($id);
