@@ -43,11 +43,16 @@
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span>账户</span>
+								<span>菜单</span>
 							</li>
 						</ul>
 						<div class="panel-body">
 							<ul class="list-group">
+								<li class="list-group-item">
+									<a href="<?= $this->url->get('manage/cps/index') ?>">
+										<span>CPS 数据</span>
+									</a>
+								</li>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/account/password') ?>">
 										<span>修改密码</span>
@@ -55,25 +60,32 @@
 								</li>
 							</ul>
 						</div>
+						<?php if ($this->session->get('group') == '超级管理员') { ?>
 						<ul class="list-group">
 							<li class="list-group-item">
-								</i> <span>CPS 数据</span>
+								</i> <span>管理</span>
 							</li>
 						</ul>
 						<div class="panel-body">
 							<ul class="list-group">
 								<li class="list-group-item">
+									<a href="<?= $this->url->get('manage/user/index') ?>">
+										<span>用户 管理</span>
+									</a>
+								</li>
+								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/cps/add') ?>">
-										<span>数据录入</span>
+										<span>CPS 数据录入</span>
 									</a>
 								</li>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/cps/import') ?>">
-										<span>数据导入</span>
+										<span>CPS 数据导入</span>
 									</a>
 								</li>
 							</ul>
 						</div>
+						<?php } ?>
 					</div>
 				</section>
 			</aside>

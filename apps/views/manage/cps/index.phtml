@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+	<div class="panel-heading">CPS数据</div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<?php foreach ($labels as $label) { ?>
+					<th><?= $label ?></th>
+				<?php } ?>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($result as $items) { ?>
+				<tr>
+					<?php foreach ($labels as $key => $label) { ?>
+						<td><?= $items->{$key} ?></td>
+					<?php } ?>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+</div>

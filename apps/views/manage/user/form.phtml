@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><?= $title ?></div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form method="post">
+			<?php foreach($labels as $key => $label) { ?>
+			<div class="form-group <?= \Phalcon\Arr::choice($errors, $key, 'has-error')?>">
+				<label><?= \Phalcon\Arr::get($errors, $key, $label) ?></label>
+				<?php
+				      if ($key == 'group') {
+					echo $this->tag->selectStatic(
+					    array(
+						$key,
+						$groups,
+						'value' => \Phalcon\Arr::get($data, $key)
+					    )
+					);
+				      } else if ($key == 'password') { ?>
+					<input name="<?= $key ?>" type="password" class="form-control" placeholder="<?= $label ?>">
+				<?php } else { ?>
+					<input name="<?= $key ?>" type="text" class="form-control" placeholder="<?= $label ?>" value="<?= \Phalcon\Arr::get($data, $key) ?>">
+				<?php } ?>
+			</div>
+			<?php } ?>
+			<button type="submit" class="btn btn-default">保存</button>
+		</form>
+	</div>
+</div>

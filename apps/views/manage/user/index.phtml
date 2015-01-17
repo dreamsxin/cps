@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+	<div class="panel-heading">用户 <div class="pull-right"><a class="btn btn-default" href="<?= $this->url->get('manage/user/add') ?>">添加</a></div></div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<?php foreach($labels as $label) { ?>
+				<th><?= $label ?></th>
+				<?php } ?>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($result as $items) { ?>
+				<tr>
+					<?php foreach($labels as $key => $label) { ?>
+						<td><?= $items->{$key} ?></td>
+					<?php } ?>
+					<td>
+					<a class="btn btn-default" href="<?= $this->url->get('manage/user/edit/'.$items->getIdString()) ?>">编辑</a>
+					<a class="btn btn-default" href="<?= $this->url->get('manage/user/del/'.$items->getIdString()) ?>">删除</a>
+					</td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+</div>
