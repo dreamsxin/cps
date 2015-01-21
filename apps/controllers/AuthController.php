@@ -36,7 +36,7 @@ class AuthController extends ControllerBase {
 	public function regAction() {
 		\Phalcon\Tag::appendTitle('注册');
 
-		$errors = [];
+		$errors = array();
 
 		if ($this->request->isPost()) {
 			$username = $this->request->getPost('username', 'trim');
