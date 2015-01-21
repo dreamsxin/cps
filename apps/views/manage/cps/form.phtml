@@ -7,19 +7,22 @@
 			<div class="form-group <?= \Phalcon\Arr::choice($errors, $key, 'has-error')?>">
 				<label><?= \Phalcon\Arr::get($errors, $key, $label) ?></label>
 				<?php
-				      if ($key == 'group') {
-					echo $this->tag->selectStatic(
-					    array(
-						$key,
-						$groups,
-						'value' => \Phalcon\Arr::get($data, $key)
-					    )
-					);
-				      } else if ($key == 'password') { ?>
-					<input name="<?= $key ?>" type="password" class="form-control" placeholder="<?= $label ?>">
-				<?php } else { ?>
+				/*
+				    if ($key == '渠道接口人') {
+						echo $this->tag->select(
+							array(
+								"渠道接口人",
+								\Users::find(array(
+									array( 'group' => '商务人员')
+								)),
+								"using" => array("id", "fullname")
+							)
+						);
+				} 
+				*/
+				?>
 					<input name="<?= $key ?>" type="text" class="form-control" placeholder="<?= $label ?>" value="<?= \Phalcon\Arr::get($data, $key) ?>">
-				<?php } ?>
+
 			</div>
 			<?php } ?>
 			<button type="submit" class="btn btn-default">保存</button>

@@ -10,11 +10,33 @@ class CpsController extends ControllerBase {
 	public function indexAction($page = 1) {
 		$group = $this->getUser('group');
 		$this->view->labels = \Cps::labels($group);
-		$channel = $this->getUser('channel');
-
 		$conditions = array();
-		if (!empty($channel)) {
-			$conditions['渠道号'] = $channel;
+		if ($this->getUser('group') == '商务人员') {
+			$channel = $this->getUser('channel');
+			$fullname = $this->getUser('fullname');
+			if (!empty($fullname)) {
+				$conditions['$or'] = array(
+					array('渠道接口人' => $fullname),
+					array('渠道号' => $channel)
+				);
+			} else {
+				$conditions['渠道号'] = $channel;
+			}
+		}
+
+		$v = $this->request->get('渠道号');
+		if (!empty($v)) {
+			$conditions['渠道号'] = $v;
+		}
+
+		$v = $this->request->get('厂商名称');
+		if (!empty($v)) {
+			$conditions['厂商名称'] = $v;
+		}
+
+		$v = $this->request->get('日期');
+		if (!empty($v)) {
+			$conditions['日期'] = $v;
 		}
 
 		$t = $this->request->get('t');
@@ -24,7 +46,8 @@ class CpsController extends ControllerBase {
 		}
 
 		$data = \Cps::find(array(
-			$conditions
+			$conditions,
+			'sort' => array('_id' => 0)
 		));
 
 		$paginator = new \Phalcon\Paginator\Adapter\Model(
@@ -78,6 +101,10 @@ class CpsController extends ControllerBase {
 				$file = fopen($file->getPathname(),"r");
 				$fileds = null;
 				while($row = fgetcsv($file)) {
+					$row = array_filter($row);
+					if (empty($row)) {
+						continue;
+					}
 					$row = array_map(function($field) {
 						return mb_convert_encoding($field, "UTF-8", "GB2312");
 					}, $row);
@@ -128,6 +155,9 @@ class CpsController extends ControllerBase {
 		}
 
 		$this->view->labels = \Cps::labels();
+		$this->view->users = \Users::find(array(
+			//array('group' => '商务人员')
+		));
 		$this->view->pick('manage/user/form');
 		$this->view->title = 'CPS 编辑';
 		$this->view->errors = $errors;
