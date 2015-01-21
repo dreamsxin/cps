@@ -50,7 +50,7 @@ class CpsController extends ControllerBase {
 
 		$data = \Cps::find(array(
 					$conditions,
-					'sort' => array('_id' => 0)
+					'sort' => array('_id' => -1)
 		));
 
 		$paginator = new \Phalcon\Paginator\Adapter\Model(
@@ -131,7 +131,7 @@ class CpsController extends ControllerBase {
 		if (!empty($v)) {
 			$conditions['日期'] = $v;
 		}
-		
+
 		if (empty($conditions)) {
 			$data = \Cps::aggregate(array(
 						array(
@@ -142,7 +142,11 @@ class CpsController extends ControllerBase {
 								'渠道号' => array('$first' => '$渠道号'),
 								'CPA单价' => array('$first' => '$CPA单价'),
 								'日期' => array('$first' => '$日期'),
+								'sortid' => array('$last' => '$_id'),
 							),
+						),
+						array(
+							'$sort' => array("sortid" => -1),
 						),
 			));
 		} else {
@@ -158,17 +162,21 @@ class CpsController extends ControllerBase {
 								'渠道号' => array('$first' => '$渠道号'),
 								'CPA单价' => array('$first' => '$CPA单价'),
 								'日期' => array('$first' => '$日期'),
+								'sortid' => array('$last' => '$_id'),
 							),
+						),
+						array(
+							'$sort' => array("sortid" => -1),
 						),
 			));
 		}
 
 		$paginator = new \Phalcon\Paginator\Adapter\NativeArray(
-			array(
-				"data" => $data['result'],
-				"limit" => 50,
-				"page" => $page
-			)
+				array(
+			"data" => $data['result'],
+			"limit" => 50,
+			"page" => $page
+				)
 		);
 
 		$this->view->page = $paginator->getPaginate();
