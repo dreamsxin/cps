@@ -24,7 +24,7 @@ class CpsController extends ControllerBase {
 				$conditions['渠道号'] = $channel;
 			}
 		} elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA用户', 'CPS用户'))) {
-
+			
 		}
 
 		$v = $this->request->get('渠道号');
@@ -59,6 +59,116 @@ class CpsController extends ControllerBase {
 			"limit" => 50,
 			"page" => $page
 				)
+		);
+
+		$this->view->page = $paginator->getPaginate();
+	}
+
+	public function groupAction($page = 1) {
+		$group = $this->getUser('group');
+		$lables = array();
+		if ($group == '信息费用户') {
+			$lables = array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+			);
+		} elseif ($group == 'CPS用户') {
+			$lables = array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+			);
+		} elseif ($group == 'CPA用户') {
+			$lables = array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+				'CPA单价' => 'CPA单价',
+			);
+		} else {
+			$lables = array(
+				'游戏名称' => '游戏名称',
+				'渠道号' => '渠道号',
+				'日期' => '日期',
+				'渠道号' => '渠道号',
+				'CP收益' => 'CP收益',
+				'CPA单价' => 'CPA单价',
+			);
+		}
+		$this->view->labels = $lables;
+		$conditions = array();
+		if ($this->getUser('group') == '商务人员') {
+			$channel = $this->getUser('channel');
+			$fullname = $this->getUser('fullname');
+			if (!empty($fullname)) {
+				$conditions['$or'] = array(
+					array('渠道接口人' => $fullname),
+					array('渠道号' => $channel)
+				);
+			} else {
+				$conditions['渠道号'] = $channel;
+			}
+		}
+
+		$v = $this->request->get('渠道号');
+		if (!empty($v)) {
+			$conditions['渠道号'] = $v;
+		}
+
+		$v = $this->request->get('厂商名称');
+		if (!empty($v)) {
+			$conditions['厂商名称'] = $v;
+		}
+
+		$v = $this->request->get('日期');
+		if (!empty($v)) {
+			$conditions['日期'] = $v;
+		}
+		
+		if (empty($conditions)) {
+			$data = \Cps::aggregate(array(
+						array(
+							'$group' => array(
+								'_id' => array('游戏名称' => '$游戏名称', '渠道号' => '$渠道号', '日期' => '$日期'),
+								'CP收益' => array('$sum' => '$CP收益'),
+								'游戏名称' => array('$first' => '$游戏名称'),
+								'渠道号' => array('$first' => '$渠道号'),
+								'CPA单价' => array('$first' => '$CPA单价'),
+								'日期' => array('$first' => '$日期'),
+							),
+						),
+			));
+		} else {
+			$data = \Cps::aggregate(array(
+						array(
+							'$match' => $conditions
+						),
+						array(
+							'$group' => array(
+								'_id' => array('游戏名称' => '$游戏名称', '渠道号' => '$渠道号', '日期' => '$日期'),
+								'CP收益' => array('$sum' => '$CP收益'),
+								'游戏名称' => array('$first' => '$游戏名称'),
+								'渠道号' => array('$first' => '$渠道号'),
+								'CPA单价' => array('$first' => '$CPA单价'),
+								'日期' => array('$first' => '$日期'),
+							),
+						),
+			));
+		}
+
+		$paginator = new \Phalcon\Paginator\Adapter\NativeArray(
+			array(
+				"data" => $data['result'],
+				"limit" => 50,
+				"page" => $page
+			)
 		);
 
 		$this->view->page = $paginator->getPaginate();
