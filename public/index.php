@@ -2,7 +2,8 @@
 error_reporting(E_ALL);
 
 if (isset($_SERVER["REQUEST_URI"])) {
-	$url = parse_url($_SERVER["REQUEST_URI"])["path"];
+	$parts = parse_url($_SERVER["REQUEST_URI"]);
+	$url = $parts["path"];
 	$_GET['_url'] = $url;
 }
 

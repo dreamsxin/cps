@@ -1,4 +1,5 @@
 <?php
+
 namespace Manage;
 
 class CpsController extends ControllerBase {
@@ -6,7 +7,7 @@ class CpsController extends ControllerBase {
 	public function initialize() {
 		\Phalcon\Tag::appendTitle('CPS 数据');
 	}
-	
+
 	public function indexAction($page = 1) {
 		$group = $this->getUser('group');
 		$this->view->labels = \Cps::labels($group);
@@ -22,6 +23,8 @@ class CpsController extends ControllerBase {
 			} else {
 				$conditions['渠道号'] = $channel;
 			}
+		} elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA用户', 'CPS用户'))) {
+
 		}
 
 		$v = $this->request->get('渠道号');
@@ -42,25 +45,25 @@ class CpsController extends ControllerBase {
 		$t = $this->request->get('t');
 		$q = $this->request->get('q');
 		if (!empty($t) && !empty($q)) {
-			$conditions[$t] = new \MongoRegex('/'.trim($q, '/').'/i');
+			$conditions[$t] = new \MongoRegex('/' . trim($q, '/') . '/i');
 		}
 
 		$data = \Cps::find(array(
-			$conditions,
-			'sort' => array('_id' => 0)
+					$conditions,
+					'sort' => array('_id' => 0)
 		));
 
 		$paginator = new \Phalcon\Paginator\Adapter\Model(
-			array(
-				"data" => $data,
-				"limit"=> 50,
-				"page" => $page
-			)
+				array(
+			"data" => $data,
+			"limit" => 50,
+			"page" => $page
+				)
 		);
 
 		$this->view->page = $paginator->getPaginate();
 	}
-	
+
 	public function addAction() {
 		if ($this->session->get('group') != '超级管理员') {
 			$this->redirect('manage/index/index', '您没有超级管理员权限');
@@ -88,7 +91,7 @@ class CpsController extends ControllerBase {
 		$this->view->errors = array();
 		$this->view->data = $_POST;
 	}
-	
+
 	public function importAction() {
 		if ($this->session->get('group') != '超级管理员') {
 			$this->redirect('manage/index/index', '您没有超级管理员权限');
@@ -97,10 +100,10 @@ class CpsController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('导入');
 		if ($this->request->hasFiles()) {
 			foreach ($this->request->getUploadedFiles() as $file) {
-				
-				$file = fopen($file->getPathname(),"r");
+
+				$file = fopen($file->getPathname(), "r");
 				$fileds = null;
-				while($row = fgetcsv($file)) {
+				while ($row = fgetcsv($file)) {
 					$row = array_filter($row);
 					if (empty($row)) {
 						continue;
@@ -112,7 +115,7 @@ class CpsController extends ControllerBase {
 						$fileds = $row;
 					} else {
 						$values = array();
-						foreach($row as $key => $value) {
+						foreach ($row as $key => $value) {
 							if (isset($fileds[$key])) {
 								$values[$fileds[$key]] = $value;
 							}
@@ -121,18 +124,17 @@ class CpsController extends ControllerBase {
 							$cps = new \Cps;
 							$cps->save($values);
 						}
-						
 					}
 				}
 				fclose($file);
-            }
-			
+			}
+
 			$this->redirect('manage/cps/index', '导入成功');
 		}
 
 		$this->view->errors = array();
 	}
-	
+
 	public function editAction($id) {
 		if ($this->session->get('group') != '超级管理员') {
 			$this->redirect('manage/index/index', '您没有超级管理员权限');
@@ -156,7 +158,7 @@ class CpsController extends ControllerBase {
 
 		$this->view->labels = \Cps::labels();
 		$this->view->users = \Users::find(array(
-			//array('group' => '商务人员')
+						//array('group' => '商务人员')
 		));
 		$this->view->pick('manage/user/form');
 		$this->view->title = 'CPS 编辑';
