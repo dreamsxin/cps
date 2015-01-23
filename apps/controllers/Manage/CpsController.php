@@ -24,7 +24,10 @@ class CpsController extends ControllerBase {
 				$conditions['渠道号'] = $channel;
 			}
 		} elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA用户', 'CPS用户'))) {
-			
+			$company = $this->getUser('company');
+			if (!empty($company)) {
+				$conditions['厂商名称'] = $company;
+			}
 		}
 
 		$v = $this->request->get('渠道号');
