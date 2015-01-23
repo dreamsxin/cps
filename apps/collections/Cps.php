@@ -74,8 +74,8 @@ class Cps extends \Phalcon\Mvc\Collection {
 				'日期' => '日期',
 				'渠道号' => '渠道号',
 				'调整后的新增用户' => '新增用户',
-				'调整后厂商收益' => '收益',
 				'CPA单价' => 'CPA单价',
+				'调整后厂商收益' => '收益',
 			);
 		} else {
 			$my = new self();
