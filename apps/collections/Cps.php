@@ -54,7 +54,9 @@ class Cps extends \Phalcon\Mvc\Collection {
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
+				'调整后的付费金额' => '信息费',
+				'厂商分成比列' => '分成比例',
+				'调整后厂商收益' => '收益',
 			);
 		} elseif ($group == 'CPS用户') {
 			return array(
@@ -62,7 +64,8 @@ class Cps extends \Phalcon\Mvc\Collection {
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
+				'厂商分成比列' => '分成比例',
+				'调整后厂商收益' => '收益',
 			);
 		} elseif ($group == 'CPA用户') {
 			return array(
@@ -70,7 +73,8 @@ class Cps extends \Phalcon\Mvc\Collection {
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
+				'调整后的新增用户' => '新增用户',
+				'调整后厂商收益' => '收益',
 				'CPA单价' => 'CPA单价',
 			);
 		} else {
