@@ -42,11 +42,13 @@
 										<span>游戏推广数据明细</span>
 									</a>
 								</li>
+								<?php if ($this->session->get('group') == '超级管理员') { ?>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/cps/group') ?>">
 										<span>游戏推广数据分组统计</span>
 									</a>
 								</li>
+								<?php } ?>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/account/password') ?>">
 										<span>修改密码</span>
