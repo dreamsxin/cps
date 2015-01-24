@@ -6,10 +6,10 @@
 				<label>渠道号</label>
 				<?php
 				echo $this->tag->textField(array(
-					'渠道号', 
+					'渠道号',
 					'value' => $this->getQuery('渠道号'),
 					'class' => 'form-control'
-				    )
+						)
 				);
 				?>
 			</div>
@@ -17,10 +17,10 @@
 				<label>厂商</label>
 				<?php
 				echo $this->tag->textField(array(
-					'厂商名称', 
+					'厂商名称',
 					'value' => $this->getQuery('厂商名称'),
 					'class' => 'form-control'
-				    )
+						)
 				);
 				?>
 			</div>
@@ -28,22 +28,22 @@
 				<label>日期</label>
 				<?php
 				echo $this->tag->textField(array(
-					'日期', 
+					'日期',
 					'value' => $this->getQuery('日期'),
 					'class' => 'form-control'
-				    )
+						)
 				);
 				?>
 			</div>
 			<div class="form-group">
 				<?php
 				echo $this->tag->selectStatic(
-				    array(
-					't',
-					$labels,
-					'value' => $this->getQuery('t'),
-					'class' => 'form-control'
-				    )
+						array(
+							't',
+							$labels,
+							'value' => $this->getQuery('t'),
+							'class' => 'form-control'
+						)
 				);
 				?>
 			</div>
@@ -65,20 +65,37 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($page->items as $item) { ?>
+			<?php
+			$items = array();
+			foreach ($page->items as $item) {
+			$items[] = $item->toArray();
+			?>
 				<tr>
 					<?php foreach ($labels as $key => $label) { ?>
 						<td><?= $item->{$key} ?></td>
 					<?php } ?>
 					<td>
-					<?php if ($this->session->get('group') == '超级管理员') { ?>
-					<a class="btn btn-default" href="<?= $this->url->get('manage/cps/edit/'.$item->getIdString()) ?>">编辑</a>
-					<a class="btn btn-default" href="<?= $this->url->get('manage/cps/del/'.$item->getIdString()) ?>">删除</a>
-					<?php } ?>
+						<?php if ($this->session->get('group') == '超级管理员') { ?>
+							<a class="btn btn-default" href="<?= $this->url->get('manage/cps/edit/' . $item->getIdString()) ?>">编辑</a>
+							<a class="btn btn-default" href="<?= $this->url->get('manage/cps/del/' . $item->getIdString()) ?>">删除</a>
+						<?php } ?>
 					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
+		<tfoot>
+			<tr>
+				<?php foreach ($labels as $key => $label) { ?>
+					<td>
+					<?php
+					if (strpos($label, '收益') !== false) {
+						echo \Phalcon\Arr::sum($items, '*.'.$key, 0);
+					}
+					?>
+					</td>
+				<?php } ?>
+			</tr>
+		</tfoot>
 	</table>
 	<?php $this->partial("shared/paginator", array('url' => 'manage/cps/index/', 'param' => NULL)) ?>
 </div>

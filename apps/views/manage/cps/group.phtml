@@ -62,6 +62,19 @@
 				</tr>
 			<?php } ?>
 		</tbody>
+		<tfoot>
+			<tr>
+				<?php foreach ($labels as $key => $label) { ?>
+					<td>
+					<?php
+					if (strpos($label, '收益') !== false) {
+						echo \Phalcon\Arr::sum($page->items, '*.'.$key, 0);
+					}
+					?>
+					</td>
+				<?php } ?>
+			</tr>
+		</tfoot>
 	</table>
 	<?php $this->partial("shared/paginator", array('url' => 'manage/cps/group/', 'param' => NULL)) ?>
 </div>
