@@ -65,6 +65,15 @@ class CpsController extends ControllerBase {
 		);
 
 		$this->view->page = $paginator->getPaginate();
+		
+		$keys = array();
+		foreach ($this->view->labels as $key => $label) {
+			if (strpos($label, '收益') !== false) {
+				$keys[$key] = 0;
+			}
+		}
+
+		$this->view->totals = \Cps::summatory($keys, $conditions);
 	}
 
 	public function groupAction($page = 1) {
@@ -188,6 +197,15 @@ class CpsController extends ControllerBase {
 		);
 
 		$this->view->page = $paginator->getPaginate();
+		
+		$keys = array();
+		foreach ($lables as $key => $label) {
+			if (strpos($label, '收益') !== false) {
+				$keys[$key] = 0;
+			}
+		}
+
+		$this->view->totals = \Cps::summatory($keys, $conditions);
 	}
 
 	public function addAction() {
@@ -235,7 +253,7 @@ class CpsController extends ControllerBase {
 						continue;
 					}
 					$row = array_map(function($field) {
-						return mb_convert_encoding($field, "UTF-8", "GB2312");
+						return trim(mb_convert_encoding($field, "UTF-8", "GB2312"));
 					}, $row);
 					if (empty($fileds)) {
 						$fileds = $row;
@@ -243,7 +261,11 @@ class CpsController extends ControllerBase {
 						$values = array();
 						foreach ($row as $key => $value) {
 							if (isset($fileds[$key])) {
-								$values[$fileds[$key]] = $value;
+								if (is_numeric($value)) {
+									$values[$fileds[$key]] =  strpos($value, ".") !== false ? floatval($value) : intval($value);
+								} else {
+									$values[$fileds[$key]] = $value;
+								}
 							}
 						}
 						if (!empty($values)) {

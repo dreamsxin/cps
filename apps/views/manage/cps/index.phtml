@@ -95,6 +95,15 @@
 					</td>
 				<?php } ?>
 			</tr>
+			<tr>
+				<?php foreach ($labels as $key => $label) { ?>
+					<td>
+					<?php
+						echo \Phalcon\Arr::get($totals, $key);
+					?>
+					</td>
+				<?php } ?>
+			</tr>
 		</tfoot>
 	</table>
 	<?php $this->partial("shared/paginator", array('url' => 'manage/cps/index/', 'param' => NULL)) ?>
