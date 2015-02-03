@@ -17,7 +17,9 @@ class UserController extends ControllerBase {
 	
 	public function indexAction($page = 1) {
 		$this->view->labels = \Users::labels();
-		$data = \Users::find();
+		$data = \Users::find(array(
+			array('username' => array('$ne' => 'root'))
+		));
 
 		$paginator = new \Phalcon\Paginator\Adapter\Model(
 			array(
@@ -113,7 +115,9 @@ class UserController extends ControllerBase {
 		}
 
 		$user = \Users::findFirst($id);
-		$user->delete();
+		if ($user && $user->username != 'root') {
+			$user->delete();
+		}
 		$this->redirect('manage/user/index', '删除成功');
 	}
 }
