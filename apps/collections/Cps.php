@@ -5,7 +5,7 @@ class Cps extends \Phalcon\Mvc\Collection {
 	public function getColumnMap() {
 		return array(
 			'CP名称' => 'CP名称',
-			'游戏名称' => '游戏名称',
+			'游戏名称' => '名称',
 			'渠道号' => '渠道号',
 			'厂商名称' => '厂商名称',
 			'日期' => '日期',
@@ -50,7 +50,7 @@ class Cps extends \Phalcon\Mvc\Collection {
 	public static function labels($group = NULL) {
 		if ($group == '信息费用户') {
 			return array(
-				'游戏名称' => '游戏名称',
+				'游戏名称' => '名称',
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
@@ -60,7 +60,7 @@ class Cps extends \Phalcon\Mvc\Collection {
 			);
 		} elseif ($group == 'CPS用户') {
 			return array(
-				'游戏名称' => '游戏名称',
+				'游戏名称' => '名称',
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
@@ -69,7 +69,7 @@ class Cps extends \Phalcon\Mvc\Collection {
 			);
 		} elseif ($group == 'CPA用户') {
 			return array(
-				'游戏名称' => '游戏名称',
+				'游戏名称' => '名称',
 				'渠道号' => '渠道号',
 				'日期' => '日期',
 				'渠道号' => '渠道号',
