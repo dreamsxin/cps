@@ -6,7 +6,7 @@ abstract class ControllerBase extends \Phalcon\Mvc\Controller {
 
 	public function beforeExecuteRoute($dispatcher) {
 		\Phalcon\Tag::setTitleSeparator('·');
-		\Phalcon\Tag::setTitle('CPS 数据中心');
+		\Phalcon\Tag::setTitle('数据中心');
 	}
 
 	public function getUser($field = NULL) {
