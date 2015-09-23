@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+	<div class="panel-heading">查询</div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form class="form" role="form" method="post">
+			<div class='row'>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label">Traffic Source ID</label>
+						<input name="sourceid" type="text" value="16806" required>
+					</div>
+					<div class="form-group">
+                                                <label class="control-label">国家代码</label>
+                                                <input name="country" type="text" value="CN" required>
+                                        </div>
+				</div>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-default">确定</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<?php if (!empty($json)) { ?>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>App的标题</th>
+				<th>图标</th>
+				<th>国家代码</th>
+				<th>操作系统</th>
+				<th>广告点击 URL</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($json->ads->ad as $ad) { ?>
+			<tr>
+				<th><?= $ad->title ?></th>
+				<th><img src="<?= $ad->icon ?>" /></th>
+				<th><?= $ad->countries ?></th>
+				<th><?= $ad->os ?></th>
+				<th><?= $ad->clkurl ?></th>
+			</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+	<div class="pagination">
+	    共 <?= $json->ads->total_records ?> 条记录
+	</div>
+	<?php } ?>
+</div>

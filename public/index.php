@@ -81,6 +81,20 @@ try {
 		return $m->selectDB('files');
 	}, TRUE);
 
+
+	$di->set('cache', function() use ($config) {
+
+		$frontCache = new Phalcon\Cache\Frontend\Data(array('lifetime' => 300));
+
+		$cache = new Phalcon\Cache\Backend\Mongo($frontCache, array(
+			'server' => $config->mongo->server,
+			'db' => 'cache',
+			'collection' => 'view'
+		));
+
+		return $cache;
+	});
+
 	$di->set('router', function() {
 		$router = new \Phalcon\Mvc\Router();
 		$router->add('/:namespace/:controller/:action/:params', array(
