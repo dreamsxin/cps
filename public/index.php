@@ -84,7 +84,7 @@ try {
 
 	$di->set('cache', function() use ($config) {
 
-		$frontCache = new Phalcon\Cache\Frontend\Data(array('lifetime' => 300));
+		$frontCache = new Phalcon\Cache\Frontend\Data(array('lifetime' => 600));
 
 		$cache = new Phalcon\Cache\Backend\Mongo($frontCache, array(
 			'server' => $config->mongo->server,

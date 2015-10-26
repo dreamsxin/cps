@@ -18,20 +18,23 @@ class AdController extends ControllerBase {
 	public function indexAction() {
 		$json = null;
 		if ($this->request->isPost()) {
-			$data = $_POST;
+			$data = array_filter($_POST);
 			$key = 'ad-'.md5(json_encode($data));
 			$cache = $this->cache->get($key);
-			if (empty($cache)) {
+			$json = $cache ? NULL : json_decode($cache);
+			if (empty($json) || json_last_error() != JSON_ERROR_NONE ) {
 				$client = new \Phalcon\Http\Client\Adapter\Curl('http://api.c.avazunativeads.com/s2s?'.http_build_query($data));
+				$client->setTimeOut(60);
 				$response = $client->get();
 				$cache = $response->getBody();
 				if ($response->getStatusCode() == 200 ) {
 					$this->cache->save($key, $cache);
 				}
+				$json = json_decode($cache);
 			}
-			$json = json_decode($cache);
 		}
 		$this->view->json = $json;
+		$this->view->data = $_POST;
 	}
 }
 

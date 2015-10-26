@@ -7,11 +7,23 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label class="control-label">Traffic Source ID</label>
-						<input name="sourceid" type="text" value="16806" required>
+						<input name="sourceid" type="text" value="<?= \Phalcon\Arr::get($data, 'sourceid', '16806') ?>" required>
 					</div>
 					<div class="form-group">
                                                 <label class="control-label">国家代码</label>
-                                                <input name="country" type="text" value="CN" required>
+                                                <input name="country" type="text" value="<?= \Phalcon\Arr::get($data, 'country', 'CN') ?>">
+                                        </div>
+					<div class="form-group">
+                                                <label class="control-label">操作系统</label>
+                                                <input name="os" type="text" value="<?= \Phalcon\Arr::get($data, 'os', 'android') ?>">
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="control-label">显示个数</label>
+                                                <input name="pagenum" type="text" value="<?= \Phalcon\Arr::get($data, 'pagenum', 30) ?>">
+                                        </div>
+					<div class="form-group">
+                                                <label class="control-label">页数</label>
+                                                <input name="page" type="text" value="<?= \Phalcon\Arr::get($data, 'page', 1) ?>">
                                         </div>
 				</div>
 				<div class="col-md-12">
@@ -29,6 +41,7 @@
 				<th>国家代码</th>
 				<th>操作系统</th>
 				<th>广告点击 URL</th>
+				<th>广告点击/安装数</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,9 +49,10 @@
 			<tr>
 				<th><?= $ad->title ?></th>
 				<th><img width="100" src="<?= $ad->icon ?>" /></th>
-				<th><?= $ad->countries ?></th>
+				<th style="max-width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><?= $ad->countries ?></th>
 				<th><?= $ad->os ?></th>
 				<th><?= $ad->clkurl ?></th>
+				<th><?= $ad->canpreclick ?>/<?= $ad->appinstalls ?></th>
 			</tr>
 			<?php } ?>
 		</tbody>
