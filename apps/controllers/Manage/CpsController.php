@@ -18,26 +18,26 @@ class CpsController extends ControllerBase {
 			if (!empty($fullname)) {
 				$conditions['$or'] = array(
 					array('渠道接口人' => $fullname),
-					array('渠道号' => $channel)
+					array('渠道名称' => $channel)
 				);
 			} else {
-				$conditions['渠道号'] = $channel;
+				$conditions['渠道名称'] = $channel;
 			}
-		} elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA用户', 'CPS用户'))) {
+		} elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA/CPD用户', 'CPS用户'))) {
 			$company = $this->getUser('company');
 			if (!empty($company)) {
-				$conditions['厂商名称'] = $company;
+				$conditions['公司名'] = $company;
 			}
 		}
 
-		$v = $this->request->get('渠道号');
+		$v = $this->request->get('渠道名称');
 		if (!empty($v)) {
-			$conditions['渠道号'] = $v;
+			$conditions['渠道名称'] = $v;
 		}
 
-		$v = $this->request->get('厂商名称');
+		$v = $this->request->get('公司名');
 		if (!empty($v)) {
-			$conditions['厂商名称'] = $v;
+			$conditions['公司名'] = $v;
 		}
 
 		$v = $this->request->get('日期');
@@ -78,42 +78,7 @@ class CpsController extends ControllerBase {
 
 	public function groupAction($page = 1) {
 		$group = $this->getUser('group');
-		$lables = array();
-		if ($group == '信息费用户') {
-			$lables = array(
-				'游戏名称' => '游戏名称',
-				'渠道号' => '渠道号',
-				'日期' => '日期',
-				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
-			);
-		} elseif ($group == 'CPS用户') {
-			$lables = array(
-				'游戏名称' => '游戏名称',
-				'渠道号' => '渠道号',
-				'日期' => '日期',
-				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
-			);
-		} elseif ($group == 'CPA用户') {
-			$lables = array(
-				'游戏名称' => '游戏名称',
-				'渠道号' => '渠道号',
-				'日期' => '日期',
-				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
-				'CPA单价' => 'CPA单价',
-			);
-		} else {
-			$lables = array(
-				'游戏名称' => '游戏名称',
-				'渠道号' => '渠道号',
-				'日期' => '日期',
-				'渠道号' => '渠道号',
-				'CP收益' => 'CP收益',
-				'CPA单价' => 'CPA单价',
-			);
-		}
+		$lables = \Cps::labels($group);
 		$this->view->labels = $lables;
 		$conditions = array();
 		if ($this->getUser('group') == '商务人员') {
@@ -122,26 +87,26 @@ class CpsController extends ControllerBase {
 			if (!empty($fullname)) {
 				$conditions['$or'] = array(
 					array('渠道接口人' => $fullname),
-					array('渠道号' => $channel)
+					array('渠道名称' => $channel)
 				);
 			} else {
-				$conditions['渠道号'] = $channel;
+				$conditions['渠道名称'] = $channel;
 			}
-                } elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA用户', 'CPS用户'))) {
+                } elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA/CPD用户', 'CPS用户'))) {
                         $company = $this->getUser('company');
                         if (!empty($company)) {
-                                $conditions['厂商名称'] = $company;
+                                $conditions['公司名'] = $company;
                         }
                 }
 
-		$v = $this->request->get('渠道号');
+		$v = $this->request->get('渠道名称');
 		if (!empty($v)) {
-			$conditions['渠道号'] = $v;
+			$conditions['渠道名称'] = $v;
 		}
 
-		$v = $this->request->get('厂商名称');
+		$v = $this->request->get('公司名');
 		if (!empty($v)) {
-			$conditions['厂商名称'] = $v;
+			$conditions['公司名'] = $v;
 		}
 
 		$v = $this->request->get('日期');
@@ -149,45 +114,37 @@ class CpsController extends ControllerBase {
 			$conditions['日期'] = $v;
 		}
 
-		if (empty($conditions)) {
-			$data = \Cps::aggregate(array(
-						array(
-							'$group' => array(
-								'_id' => array('游戏名称' => '$游戏名称', '渠道号' => '$渠道号', '日期' => '$日期'),
-								'CP收益' => array('$sum' => '$CP收益'),
-								'游戏名称' => array('$first' => '$游戏名称'),
-								'渠道号' => array('$first' => '$渠道号'),
-								'CPA单价' => array('$first' => '$CPA单价'),
-								'日期' => array('$first' => '$日期'),
-								'sortid' => array('$last' => '$_id'),
-							),
-						),
-						array(
-							'$sort' => array("sortid" => -1),
-						),
-			));
-		} else {
-			$data = \Cps::aggregate(array(
-						array(
-							'$match' => $conditions
-						),
-						array(
-							'$group' => array(
-								'_id' => array('游戏名称' => '$游戏名称', '渠道号' => '$渠道号', '日期' => '$日期'),
-								'CP收益' => array('$sum' => '$CP收益'),
-								'游戏名称' => array('$first' => '$游戏名称'),
-								'渠道号' => array('$first' => '$渠道号'),
-								'CPA单价' => array('$first' => '$CPA单价'),
-								'日期' => array('$first' => '$日期'),
-								'sortid' => array('$last' => '$_id'),
-							),
-						),
-						array(
-							'$sort' => array("sortid" => -1),
-						),
-			));
+		$query = array(
+			array(
+				'$group' => array(
+					'_id' => array('游戏名称' => '$游戏名称', '渠道名称' => '$渠道名称', '日期' => '$日期'),
+					'厂商收益' => array('$sum' => '$厂商收益'),
+					'新增用户数' => array('$sum' => '$新增用户数'),
+					'调整后新增用户' => array('$sum' => '$调整后新增用户'),
+					'利润' => array('$sum' => '$利润'),
+					'信息费' => array('$sum' => '$信息费'),
+					'调整后信息费' => array('$sum' => '$调整后信息费'),
+					'总付费流水' => array('$sum' => '$总付费流水'),
+					'调整后总付费流水' => array('$sum' => '$调整后总付费流水'),
+					'坏账' => array('$sum' => '$坏账'),
+					'公司名' => array('$first' => '$公司名'),
+					'应用名称' => array('$first' => '$应用名称'),
+					'游戏名称' => array('$first' => '$游戏名称'),
+					'渠道名称' => array('$first' => '$渠道名称'),
+					'CPA/CPD单价' => array('$first' => '$CPA/CPD单价'),
+					'调整后CPA/CPD单价' => array('$first' => '$调整后CPA/CPD单价'),
+					'日期' => array('$first' => '$日期'),
+					'sortid' => array('$last' => '$_id'),
+				),
+			),
+			array(
+				'$sort' => array("sortid" => -1),
+			),
+		);
+		if (!empty($conditions)) {
+			$query[] = array('$match' => $conditions);
 		}
-
+		$data = \Cps::aggregate($query);
 		$paginator = new \Phalcon\Paginator\Adapter\NativeArray(
 				array(
 			"data" => $data['result'],
@@ -332,8 +289,8 @@ class CpsController extends ControllerBase {
                 if ($this->session->get('group') != '超级管理员') {
                         $this->redirect('manage/index/index', '您没有超级管理员权限');
                 }
-
-		\Cps::drop();
-		$this->redirect('manage/cps/index', '清除成功');
+		//\Cps::setup(array('allowDrop' => true));
+		//\Cps::drop();
+		$this->redirect('manage/cps/index', '禁止清除');
 	}
 }
