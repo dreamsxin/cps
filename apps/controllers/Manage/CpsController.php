@@ -40,9 +40,12 @@ class CpsController extends ControllerBase {
 			$conditions['公司名'] = $v;
 		}
 
-		$v = $this->request->get('日期');
-		if (!empty($v)) {
-			$conditions['日期'] = $v;
+		$sd = $this->request->get('sd');
+		$ed = $this->request->get('ed');
+		if (!empty($sd)) {
+			$conditions['日期'] = array('$gt' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
+		} else if (!empty($ed)) {
+			$conditions['日期'] = array('$lte' => new \MongoDate(strtotime($ed)));
 		}
 
 		$t = $this->request->get('t');
@@ -109,10 +112,13 @@ class CpsController extends ControllerBase {
 			$conditions['公司名'] = $v;
 		}
 
-		$v = $this->request->get('日期');
-		if (!empty($v)) {
-			$conditions['日期'] = $v;
-		}
+                $sd = $this->request->get('sd');
+                $ed = $this->request->get('ed');
+                if (!empty($sd)) {
+                        $conditions['日期'] = array('$gt' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
+                } else if (!empty($ed)) {
+                        $conditions['日期'] = array('$lte' => new \MongoDate(strtotime($ed)));
+                }
 
 		$query = array(
 			array(
@@ -158,7 +164,7 @@ class CpsController extends ControllerBase {
 		$keys = array();
 		foreach ($lables as $key => $label) {
 			if (strpos($label, '收益') !== false) {
-				$keys[$key] = 0;
+		//		$keys[$key] = 0;
 			}
 		}
 
@@ -174,7 +180,6 @@ class CpsController extends ControllerBase {
 		if ($this->request->isPost()) {
 			$cps = new \Cps();
 			$cps->assign($this->request->getPost(NULL, 'trim'));
-
 			if ($cps->save()) {
 				$this->redirect('manage/cps/index', '录入成功');
 			} else {
@@ -248,6 +253,9 @@ class CpsController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('CPS 编辑');
 		$errors = array();
 		$cps = \Cps::findFirst($id);
+		if (!$cps) {
+			$cps = new \Cps;
+		}
 		if ($this->request->isPost()) {
 			$cps->assign($this->request->getPost(NULL, 'trim'));
 			if ($cps->save()) {
@@ -262,9 +270,6 @@ class CpsController extends ControllerBase {
 		}
 
 		$this->view->labels = \Cps::labels();
-		$this->view->users = \Users::find(array(
-						//array('group' => '商务人员')
-		));
 		$this->view->pick('manage/user/form');
 		$this->view->title = 'CPS 编辑';
 		$this->view->errors = $errors;
@@ -289,8 +294,8 @@ class CpsController extends ControllerBase {
                 if ($this->session->get('group') != '超级管理员') {
                         $this->redirect('manage/index/index', '您没有超级管理员权限');
                 }
-		//\Cps::setup(array('allowDrop' => true));
-		//\Cps::drop();
+		\Cps::setup(array('allowDrop' => true));
+		\Cps::drop();
 		$this->redirect('manage/cps/index', '禁止清除');
 	}
 }

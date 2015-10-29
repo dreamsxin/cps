@@ -28,12 +28,21 @@
 				<label>日期</label>
 				<?php
 				echo $this->tag->dateField(array(
-					'日期',
-					'value' => $this->getQuery('日期'),
+					'sd',
+					'value' => $this->getQuery('sd'),
 					'class' => 'form-control'
 						)
 				);
 				?>
+				-
+				<?php
+                                echo $this->tag->dateField(array(
+                                        'ed',
+                                        'value' => $this->getQuery('ed'),
+                                        'class' => 'form-control'
+                                                )
+                                );
+                                ?>
 			</div>
 			<div class="form-group">
 				<?php

@@ -26,14 +26,23 @@
 			</div>
 			<div class="form-group">
 				<label>日期</label>
-				<?php
-				echo $this->tag->dateField(array(
-					'日期', 
-					'value' => $this->getQuery('日期'),
-					'class' => 'form-control'
-				    )
-				);
-				?>
+                                <?php
+                                echo $this->tag->dateField(array(
+                                        'sd',
+                                        'value' => $this->getQuery('sd'),
+                                        'class' => 'form-control'
+                                                )
+                                );
+                                ?>
+                                -
+                                <?php
+                                echo $this->tag->dateField(array(
+                                        'ed',
+                                        'value' => $this->getQuery('ed'),
+                                        'class' => 'form-control'
+                                                )
+                                );
+                                ?>
 			</div>
 			<div class="input-group">
 				<span class="input-group-btn">
@@ -55,7 +64,14 @@
 			<?php foreach ($page->items as $item) { ?>
 				<tr>
 					<?php foreach ($labels as $key => $label) { ?>
-						<td><?= $item[$key] ?></td>
+						<td><?php
+							if ($item[$key] instanceof MongoDate) {
+				                                echo date('Y-m-d', $item[$key]->sec);
+                        				} else {
+							 echo $item[$key];
+							}
+							?>
+						</td>
 					<?php } ?>
 					<td>
 					</td>
