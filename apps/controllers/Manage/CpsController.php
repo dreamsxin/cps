@@ -164,7 +164,7 @@ class CpsController extends ControllerBase {
 		$keys = array();
 		foreach ($lables as $key => $label) {
 			if (strpos($label, '收益') !== false) {
-		//		$keys[$key] = 0;
+				$keys[$key] = 0;
 			}
 		}
 
