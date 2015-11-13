@@ -3,24 +3,24 @@
 	<div class="panel-body">
 		<form class="form-inline" method="get" action="#">
 			<div class="form-group">
-				<label>渠道名称</label>
+				<label>应用名称</label>
 				<?php
 				echo $this->tag->textField(array(
-					'渠道名称', 
-					'value' => $this->getQuery('渠道名称'),
+					'应用名称',
+					'value' => $this->getQuery('应用名称'),
 					'class' => 'form-control'
-				    )
+						)
 				);
 				?>
 			</div>
 			<div class="form-group">
-				<label>公司名</label>
+				<label>游戏名称</label>
 				<?php
 				echo $this->tag->textField(array(
-					'公司名', 
-					'value' => $this->getQuery('公司名'),
+					'游戏名称',
+					'value' => $this->getQuery('游戏名称'),
 					'class' => 'form-control'
-				    )
+						)
 				);
 				?>
 			</div>
@@ -54,6 +54,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th></th>
 				<?php foreach ($labels as $label) { ?>
 					<th><?= $label ?></th>
 				<?php } ?>
@@ -63,6 +64,7 @@
 		<tbody>
 			<?php foreach ($page->items as $item) { ?>
 				<tr>
+					<th></th>
 					<?php foreach ($labels as $key => $label) { ?>
 						<td><?php
 							if ($item[$key] instanceof MongoDate) {
@@ -80,17 +82,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<?php foreach ($labels as $key => $label) { ?>
-					<td>
-					<?php
-					if (strpos($label, '收益') !== false) {
-						echo \Phalcon\Arr::sum($page->items, '*.'.$key, 0);
-					}
-					?>
-					</td>
-				<?php } ?>
-			</tr>
-			<tr>
+				<th>总计</th>
 				<?php foreach ($labels as $key => $label) { ?>
 					<td>
 					<?php

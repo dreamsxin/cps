@@ -30,14 +30,14 @@ class CpsController extends ControllerBase {
 			}
 		}
 
-		$v = $this->request->get('渠道名称');
+		$v = $this->request->get('应用名称');
 		if (!empty($v)) {
-			$conditions['渠道名称'] = $v;
+			$conditions['应用名称'] = $v;
 		}
 
-		$v = $this->request->get('公司名');
+		$v = $this->request->get('游戏名称');
 		if (!empty($v)) {
-			$conditions['公司名'] = $v;
+			$conditions['游戏名称'] = $v;
 		}
 
 		$sd = $this->request->get('sd');
@@ -95,30 +95,30 @@ class CpsController extends ControllerBase {
 			} else {
 				$conditions['渠道名称'] = $channel;
 			}
-                } elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA/CPD用户', 'CPS用户'))) {
-                        $company = $this->getUser('company');
-                        if (!empty($company)) {
-                                $conditions['公司名'] = $company;
-                        }
-                }
+        } elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA/CPD用户', 'CPS用户'))) {
+            $company = $this->getUser('company');
+            if (!empty($company)) {
+				$conditions['公司名'] = $company;
+            }
+        }
 
-		$v = $this->request->get('渠道名称');
+		$v = $this->request->get('应用名称');
 		if (!empty($v)) {
-			$conditions['渠道名称'] = $v;
+			$conditions['应用名称'] = $v;
 		}
 
-		$v = $this->request->get('公司名');
+		$v = $this->request->get('游戏名称');
 		if (!empty($v)) {
-			$conditions['公司名'] = $v;
+			$conditions['游戏名称'] = $v;
 		}
 
-                $sd = $this->request->get('sd');
-                $ed = $this->request->get('ed');
-                if (!empty($sd)) {
-                        $conditions['日期'] = array('$gt' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
-                } else if (!empty($ed)) {
-                        $conditions['日期'] = array('$lte' => new \MongoDate(strtotime($ed)));
-                }
+		$sd = $this->request->get('sd');
+		$ed = $this->request->get('ed');
+		if (!empty($sd)) {
+				$conditions['日期'] = array('$gt' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
+		} else if (!empty($ed)) {
+				$conditions['日期'] = array('$lte' => new \MongoDate(strtotime($ed)));
+		}
 
 		$query = array(
 			array(
