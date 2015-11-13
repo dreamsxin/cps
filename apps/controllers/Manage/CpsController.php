@@ -32,12 +32,12 @@ class CpsController extends ControllerBase {
 
 		$v = $this->request->get('应用名称');
 		if (!empty($v)) {
-			$conditions['应用名称'] = $v;
+			$conditions['应用名称'] =is_numeric($v) ? (int)$v : $v;
 		}
 
 		$v = $this->request->get('游戏名称');
 		if (!empty($v)) {
-			$conditions['游戏名称'] = $v;
+			$conditions['游戏名称'] = is_numeric($v) ? (int)$v : $v;
 		}
 
 		$sd = $this->request->get('sd');
@@ -98,18 +98,18 @@ class CpsController extends ControllerBase {
         } elseif (in_array($this->getUser('group'), array('信息费用户', 'CPA/CPD用户', 'CPS用户'))) {
             $company = $this->getUser('company');
             if (!empty($company)) {
-				$conditions['公司名'] = $company;
+				$conditions['公司名'] = is_numeric($v) ? (int)$v : $v;
             }
         }
 
 		$v = $this->request->get('应用名称');
 		if (!empty($v)) {
-			$conditions['应用名称'] = $v;
+			$conditions['应用名称'] = is_numeric($v) ? (int)$v : $v;
 		}
 
 		$v = $this->request->get('游戏名称');
 		if (!empty($v)) {
-			$conditions['游戏名称'] = $v;
+			$conditions['游戏名称'] = is_numeric($v) ? (int)$v : $v;
 		}
 
 		$sd = $this->request->get('sd');
