@@ -71,7 +71,7 @@ class CpsController extends ControllerBase {
 		
 		$keys = array();
 		foreach ($this->view->labels as $key => $label) {
-			if (strpos($label, '收益') !== false) {
+			if (strpos($label, '收益') !== false || $label == '调整后CPA/CPD单价'  || $label == '新增用户数' || $label == '调整后新增用户' || $label == '厂商收益' || $label == '利润') {
 				$keys[$key] = 0;
 			}
 		}
@@ -163,7 +163,7 @@ class CpsController extends ControllerBase {
 		
 		$keys = array();
 		foreach ($lables as $key => $label) {
-			if (strpos($label, '收益') !== false) {
+			if (strpos($label, '收益') !== false || $label == '调整后CPA/CPD单价'  || $label == '新增用户数' || $label == '调整后新增用户' || $label == '厂商收益' || $label == '利润') {
 				$keys[$key] = 0;
 			}
 		}
