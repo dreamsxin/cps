@@ -10,6 +10,12 @@ class ApiController extends \Phalcon\Mvc\Controller {
 			if (!$delivery->save()) {
 				$this->response->setStatusCode(500, 'Server Error');
 			}
+		} else if ($this->request->isGet()) {
+			$delivery = new \Delivery();
+			$delivery->assign($this->request->getQuery());
+			if (!$delivery->save()) {
+				$this->response->setStatusCode(500, 'Server Error');
+			}
 		} else {
 			$this->response->setStatusCode(400, 'Bad Request');
 		}
