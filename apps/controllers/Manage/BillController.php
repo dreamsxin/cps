@@ -8,7 +8,7 @@ class BillController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('计费信息');
 		$this->view->labels = \Delivery::labels();
 		$conditions = array();
-		$reference = $this->get('reference');
+		$reference = $this->request->get('reference');
 		if ($reference) {
 			$conditions['reference'] = $reference;
 		}
