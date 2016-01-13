@@ -6,31 +6,6 @@ class BillController extends ControllerBase {
 
 	public function indexAction($page = 1) {
 		\Phalcon\Tag::appendTitle('计费信息');
-		$this->view->labels = \Mo::labels();
-                $conditions = array();
-                $channel = $this->getUser('channel');
-                if ($channel) {
-                        $conditions['MSG'] = $channel;
-                } 
-
-                $data = \Mo::find(array(
-                        $conditions,
-                        'sort' => array('_id' => -1)
-                ));
-
-                $paginator = new \Phalcon\Paginator\Adapter\Model(
-                                array(
-                        "data" => $data,
-                        "limit" => 50,
-                        "page" => $page
-                                )
-                );
-
-                $this->view->page = $paginator->getPaginate();
-	}
-
-	public function deliveryAction($page = 1) {
-		\Phalcon\Tag::appendTitle('计费成功信息');
 		$this->view->labels = \Delivery::labels();
 		$conditions = array();
 		$channel = $this->getUser('channel');
@@ -45,9 +20,9 @@ class BillController extends ControllerBase {
 
 		$paginator = new \Phalcon\Paginator\Adapter\Model(
 				array(
-			"data" => $data,
-			"limit" => 50,
-			"page" => $page
+					"data" => $data,
+					"limit" => 50,
+					"page" => $page
 				)
 		);
 
