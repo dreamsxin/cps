@@ -6,19 +6,16 @@
                                 <?php foreach ($labels as $label) { ?>
                                         <th><?= $label ?></th>
                                 <?php } ?>
-                                <th></th>
                         </tr>
                 </thead>
                 <tbody>
                         <?php
-                        $items = array();
                         foreach ($page->items as $item) {
-				$items[] = $item->toArray();
                         ?>
                                 <tr>
-                                        <?php foreach ($items as $key => $label) { ?>
-                                                <td><?= $item->{$key} ?></td>
-                                        <?php } ?>
+				<?php foreach ($labels as $key => $label) { ?>
+					<td><?= $item->{$key} ?></td>
+				<?php } ?>
                                 </tr>
                         <?php } ?>
                 </tbody>
