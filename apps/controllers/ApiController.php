@@ -12,7 +12,7 @@ class ApiController extends \Phalcon\Mvc\Controller {
 			}
 		} else if ($this->request->isGet()) {
 			$delivery = new \Delivery();
-			$delivery->assign($this->request->getQuery());
+			$delivery->assign($this->request->get());
 			if (!$delivery->save()) {
 				$this->response->setStatusCode(500, 'Server Error');
 			}

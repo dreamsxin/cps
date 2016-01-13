@@ -1,5 +1,21 @@
 <div class="panel panel-default">
         <div class="panel-heading">计费信息</div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form class="form" role="form" method="get">
+			<div class='row'>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label">渠道号D</label>
+						<input name="reference" type="text" value="<?= \Phalcon\Arr::get($_GET, 'reference') ?>">
+					</div>
+				</div>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-default">确定</button>
+				</div>
+			</div>
+		</form>
+	</div>
 	<table class="table">
                 <thead>
                         <tr>
