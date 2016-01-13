@@ -10,7 +10,7 @@ class BillController extends ControllerBase {
 		$conditions = array();
 		$channel = $this->getUser('channel');
 		if ($channel) {
-			$conditions['msg'] = $channel;
+			$conditions['reference'] = $channel;
 		}
 
 		$data = \Delivery::find(array(
@@ -27,6 +27,9 @@ class BillController extends ControllerBase {
 		);
 
 		$this->view->page = $paginator->getPaginate();
+
+		$keys = array('enduserprice' => 0);
+		$this->view->totals = \Delivery::summatory($keys, $conditions);
 	}
 
 }
