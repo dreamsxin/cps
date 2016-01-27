@@ -42,8 +42,10 @@ class CpsController extends ControllerBase {
 
 		$sd = $this->request->get('sd');
 		$ed = $this->request->get('ed');
-		if (!empty($sd)) {
-			$conditions['日期'] = array('$gt' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
+		if (!empty($sd) && !empty($ed)) {
+			$conditions['日期'] = array('$gte' => new \MongoDate(strtotime($sd)), '$lte' => new \MongoDate(strtotime($ed)));
+		} else if (!empty($sd)) {
+			$conditions['日期'] = array('$gte' => new \MongoDate(strtotime($sd)));
 		} else if (!empty($ed)) {
 			$conditions['日期'] = array('$lte' => new \MongoDate(strtotime($ed)));
 		}
