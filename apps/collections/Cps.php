@@ -11,6 +11,21 @@ class Cps extends \Phalcon\Mvc\Collection {
 				$this->{$key} = new MongoDate(strtotime($value));
 			}
 		}
+
+		if (!empty($this->{'日期'}) && is_string($this->{'日期'})) {
+			$this->{'日期'} = new MongoDate(strtotime(str_replace('/', '-', $this->{'日期'})));
+		}
+	}
+
+	public function afterSave() {
+		if (!empty($this->{'游戏名称'})) {
+			$game = \Games::findFirst(array('name' => $this->{'游戏名称'}));
+			if (!$game) {
+				$game = new \Games;
+				$game->name = $this->{'游戏名称'};
+				$game->save();
+			}
+		}
 	}
 
 	public function afterFetch() {
