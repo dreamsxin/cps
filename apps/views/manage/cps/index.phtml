@@ -16,8 +16,10 @@
 			<div class="form-group">
 				<label>游戏名称</label>
 				<?php
-				echo $this->tag->textField(array(
+				echo $this->tag->select(array(
 					'游戏名称',
+					\Games::find(),
+					"using" => array("name", "name"),
 					'value' => $this->getQuery('游戏名称'),
 					'class' => 'form-control'
 						)
