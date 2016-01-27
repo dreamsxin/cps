@@ -212,7 +212,7 @@ class CpsController extends ControllerBase {
 				$file = fopen($file->getPathname(), "r");
 				$fileds = null;
 				while ($row = fgetcsv($file)) {
-					$row = array_filter($row);
+					$row = array_filter($row, function($v){return !empty($v) || is_numeric($v)});
 					if (empty($row)) {
 						continue;
 					}
