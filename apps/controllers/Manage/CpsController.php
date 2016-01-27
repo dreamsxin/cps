@@ -296,6 +296,8 @@ class CpsController extends ControllerBase {
                 }
 		\Cps::setup(array('allowDrop' => true));
 		\Cps::drop();
-		$this->redirect('manage/cps/index', '禁止清除');
+		\Games::setup(array('allowDrop' => true));
+		\Games::drop();
+		$this->redirect('manage/cps/index');
 	}
 }
