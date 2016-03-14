@@ -6,21 +6,20 @@ if (isset($_SERVER["REQUEST_URI"])) {
 	$url = $parts["path"];
 	$_GET['_url'] = $url;
 }
-
+$filename = 'config.php';
 try {
+	$loader = new Phalcon\Loader();
 
 	$path = __DIR__ . '/../apps/config/';
 
 	Phalcon\Config\Adapter\Php::setBasePath($path);
-	
-	$config = Phalcon\Config\Adapter\Php::factory('config.php');
+
+	$config = Phalcon\Config\Adapter\Php::factory($filename);
 
 	$filename = 'config.local.php';
 	if (file_exists($path . $filename)) {
 		$config->merge($config->load($filename));
 	}
-
-	$loader = new Phalcon\Loader();
 
 	$loader->registerDirs(
 			array(
@@ -29,7 +28,9 @@ try {
 				$config->collectionDir,
 				$config->libraryDir,
 			)
-	)->register();
+	);
+	
+	$loader->register();
 
 	$di = new Phalcon\DI\FactoryDefault();
 
@@ -108,7 +109,9 @@ try {
 
 	$application = new \Phalcon\Mvc\Application($di);
 
-	echo $application->handle()->getContent();
+	$res = $application->handle();
+
+	echo $res->getContent();
 } catch (\Exception $e) {
 	echo $e->getMessage();
 }
