@@ -60,5 +60,15 @@ class BillController extends ControllerBase {
 		$this->view->totals = \Delivery::summatory($keys, $conditions);
 	}
 
+	public function dropAction() {
+		if ($this->session->get('group') != '超级管理员') {
+			$this->redirect('manage/bill/index', '您没有超级管理员权限');
+		}
+
+		\Mo::drop();
+		\Delivery::drop();
+		$this->redirect('manage/bill/index', '清除成功');
+	}
+
 }
 

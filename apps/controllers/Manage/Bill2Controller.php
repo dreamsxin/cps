@@ -84,5 +84,15 @@ class Bill2Controller extends ControllerBase {
 		$this->view->totals = \Dn2::summatory($keys, $conditions);
 	}
 
+	public function dropAction() {
+		if ($this->session->get('group') != '超级管理员') {
+			$this->redirect('manage/bill2/index', '您没有超级管理员权限');
+		}
+
+		\Mo2::drop();
+		\Dn2::drop();
+		$this->redirect('manage/bill2/index', '清除成功');
+	}
+
 }
 
