@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+        <div class="panel-heading">计费成功信息</div>
+	<table class="table">
+                <thead>
+                        <tr>
+                                <?php foreach ($labels as $label) { ?>
+                                        <th><?= $label ?></th>
+                                <?php } ?>
+                                <th></th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <?php
+                        $items = array();
+                        foreach ($page->items as $item) {
+				$items[] = $item->toArray();
+                        ?>
+                                <tr>
+                                        <?php foreach ($labels as $key => $label) { ?>
+                                                <td><?= $item->{$key} ?></td>
+                                        <?php } ?>
+                                </tr>
+                        <?php } ?>
+                </tbody>
+	</table>
+</div>
+
