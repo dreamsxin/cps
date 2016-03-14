@@ -5,7 +5,7 @@ namespace Manage;
 class Bill2Controller extends ControllerBase {
 
 	public function indexAction($page = 1) {
-		\Phalcon\Tag::appendTitle('艾米计费信息');
+		\Phalcon\Tag::appendTitle('艾米Mo信息');
 		$this->view->labels = \Mo2::labels();
 		$conditions = array();
 		$operator = $this->request->get('operator');
@@ -13,15 +13,15 @@ class Bill2Controller extends ControllerBase {
 			$conditions['$or']['operator'] = $moContent;
 		}
 		$countryISO = $this->request->get('countryISO');
-		if ($reference) {
+		if ($countryISO) {
 			$conditions['$or']['countryISO'] = $moContent;
 		}
 		$moContent = $this->request->get('moContent');
-		if ($reference) {
+		if ($moContent) {
 			$conditions['$or']['moContent'] = $moContent;
 		}
 		$addtime = $this->request->get('addtime');
-		if ($reference) {
+		if ($addtime) {
 			$conditions['$or']['addtime'] = $reference;
 		}
 
@@ -45,7 +45,7 @@ class Bill2Controller extends ControllerBase {
 	}
 
 	public function dnAction($page = 1) {
-		\Phalcon\Tag::appendTitle('艾米计费信息');
+		\Phalcon\Tag::appendTitle('艾米Dn信息');
 		$this->view->labels = \Dn2::labels();
 		$conditions = array();
 		$operator = $this->request->get('operator');
