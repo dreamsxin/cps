@@ -28,7 +28,7 @@ class Bill2Controller extends ControllerBase {
 
 		$this->view->page = $paginator->getPaginate();
 
-		$keys = array('enduserprice' => 0);
+		$keys = array('price' => 0);
 		$this->view->totals = \Delivery::summatory($keys, $conditions);
 	}
 
