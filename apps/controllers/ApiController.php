@@ -43,7 +43,11 @@ class ApiController extends \Phalcon\Mvc\Controller {
 				$this->response->setStatusCode(500, 'Server Error');
 			}
 		} else {
-			$this->response->setStatusCode(400, 'Bad Request');
+			$mo = new \Mo2();
+			$mo->assign($this->request->get());
+			if (!$mo->save()) {
+				$this->response->setStatusCode(500, 'Server Error');
+			}
 		}
 		$this->response->send();exit;
 	}
