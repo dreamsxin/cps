@@ -41,7 +41,7 @@ class Bill2Controller extends ControllerBase {
 		$this->view->page = $paginator->getPaginate();
 
 		$keys = array('price' => 0);
-		$this->view->totals = \Delivery::summatory($keys, $conditions);
+		$this->view->totals = \Mo2::summatory($keys, $conditions);
 	}
 
 	public function dnAction($page = 1) {
@@ -81,7 +81,7 @@ class Bill2Controller extends ControllerBase {
 		$this->view->page = $paginator->getPaginate();
 
 		$keys = array('price' => 0);
-		$this->view->totals = \Delivery::summatory($keys, $conditions);
+		$this->view->totals = \Dn2::summatory($keys, $conditions);
 	}
 
 }
