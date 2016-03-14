@@ -329,9 +329,9 @@ class CpsController extends ControllerBase {
 	}
 
 	public function dropAction() {
-                if ($this->session->get('group') != '超级管理员') {
-                        $this->redirect('manage/index/index', '您没有超级管理员权限');
-                }
+		if ($this->session->get('group') != '超级管理员') {
+				$this->redirect('manage/index/index', '您没有超级管理员权限');
+		}
 
 		\Cps::drop();
 		$this->redirect('manage/cps/index', '清除成功');

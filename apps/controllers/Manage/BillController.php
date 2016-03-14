@@ -65,6 +65,8 @@ class BillController extends ControllerBase {
 			$this->redirect('manage/bill/index', '您没有超级管理员权限');
 		}
 
+		// \Mo::setup(array('allowDrop' => true));
+		// \Delivery::setup(array('allowDrop' => true));
 		\Mo::drop();
 		\Delivery::drop();
 		$this->redirect('manage/bill/index', '清除成功');

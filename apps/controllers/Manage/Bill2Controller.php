@@ -88,7 +88,8 @@ class Bill2Controller extends ControllerBase {
 		if ($this->session->get('group') != '超级管理员') {
 			$this->redirect('manage/bill2/index', '您没有超级管理员权限');
 		}
-
+		\Mo2::setup(array('allowDrop' => true));
+		\Dn2::setup(array('allowDrop' => true));
 		\Mo2::drop();
 		\Dn2::drop();
 		$this->redirect('manage/bill2/index', '清除成功');
