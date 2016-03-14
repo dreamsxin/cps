@@ -39,6 +39,7 @@ class ApiController extends \Phalcon\Mvc\Controller {
 		if ($this->request->isPost()) {
 			$mo = new \Mo2();
 			$mo->assign($this->request->getPost());
+			$mo->price = (int)$mo->price;
 			if (!$mo->save()) {
 				$this->response->setStatusCode(500, 'Server Error');
 			}

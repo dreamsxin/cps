@@ -8,9 +8,21 @@ class Bill2Controller extends ControllerBase {
 		\Phalcon\Tag::appendTitle('艾米计费信息');
 		$this->view->labels = \Mo2::labels();
 		$conditions = array();
-		$reference = $this->request->get('reference');
+		$operator = $this->request->get('operator');
 		if ($reference) {
-			$conditions['reference'] = $reference;
+			$conditions['$or']['operator'] = $moContent;
+		}
+		$countryISO = $this->request->get('countryISO');
+		if ($reference) {
+			$conditions['$or']['countryISO'] = $moContent;
+		}
+		$moContent = $this->request->get('moContent');
+		if ($reference) {
+			$conditions['$or']['moContent'] = $moContent;
+		}
+		$addtime = $this->request->get('addtime');
+		if ($reference) {
+			$conditions['$or']['addtime'] = $reference;
 		}
 
 		$data = \Mo2::find(array(
@@ -68,7 +80,7 @@ class Bill2Controller extends ControllerBase {
 
 		$this->view->page = $paginator->getPaginate();
 
-		$keys = array('enduserprice' => 0);
+		$keys = array('price' => 0);
 		$this->view->totals = \Delivery::summatory($keys, $conditions);
 	}
 
