@@ -9,12 +9,12 @@ class Bill2Controller extends ControllerBase {
 		$this->view->labels = \Mo2::labels();
 		$conditions = array();
 		$operator = $this->request->get('operator');
-		if ($reference) {
-			$conditions['$or']['operator'] = $moContent;
+		if ($operator) {
+			$conditions['$or']['operator'] = $operator;
 		}
 		$countryISO = $this->request->get('countryISO');
 		if ($countryISO) {
-			$conditions['$or']['countryISO'] = $moContent;
+			$conditions['$or']['countryISO'] = $countryISO;
 		}
 		$moContent = $this->request->get('moContent');
 		if ($moContent) {
@@ -22,7 +22,7 @@ class Bill2Controller extends ControllerBase {
 		}
 		$addtime = $this->request->get('addtime');
 		if ($addtime) {
-			$conditions['$or']['addtime'] = $reference;
+			$conditions['$or']['addtime'] = $addtime;
 		}
 
 		$data = \Mo2::find(array(
