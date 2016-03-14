@@ -9,6 +9,7 @@ class Mo2 extends \Phalcon\Mvc\Collection {
 			'origin' => 'origin',
 			'moContent' => 'moContent',
 			'spnumber' => 'spnumber',
+			'price' => 'price',
 			'operator' => 'operator',
 			'addtime' => 'addtime',
 		);
