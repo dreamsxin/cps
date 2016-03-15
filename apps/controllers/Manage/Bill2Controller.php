@@ -4,9 +4,10 @@ namespace Manage;
 
 class Bill2Controller extends ControllerBase {
 
-	public function indexAction($page = 1) {
+	public function indexAction() {
 		\Phalcon\Tag::appendTitle('艾米Mo信息');
 		$this->view->labels = \Mo2::labels();
+		$page = $this->request->get('page', 'int', 1);
 		$conditions = array();
 		$operator = $this->request->get('operator');
 		if ($operator) {

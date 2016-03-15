@@ -4,9 +4,10 @@ namespace Manage;
 
 class BillController extends ControllerBase {
 
-	public function indexAction($page = 1) {
+	public function indexAction() {
 		\Phalcon\Tag::appendTitle('计费信息');
 		$this->view->labels = \Delivery::labels();
+		$page = $this->request->get('page', 'int', 1);
 		$conditions = array();
 		$reference = $this->request->get('reference');
 		if ($reference) {

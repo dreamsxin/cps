@@ -8,9 +8,10 @@ class CpsController extends ControllerBase {
 		\Phalcon\Tag::appendTitle('CPS 数据');
 	}
 
-	public function indexAction($page = 1) {
+	public function indexAction() {
 		$group = $this->getUser('group');
 		$this->view->labels = \Cps::labels($group);
+		$page = $this->request->get('page', 'int', 1);
 		$conditions = array();
 		if ($this->getUser('group') == '商务人员') {
 			$channel = $this->getUser('channel');
