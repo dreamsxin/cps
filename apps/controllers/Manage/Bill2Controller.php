@@ -23,7 +23,7 @@ class Bill2Controller extends ControllerBase {
 		}
 		$addtime = $this->request->get('addtime');
 		if ($addtime) {
-			$conditions['addtime'] = $addtime;
+			$conditions['addtime'] =  new MongoRegex("/^".$addtime."/");
 		}
 
 		$data = \Mo2::find(array(
