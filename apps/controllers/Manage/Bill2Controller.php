@@ -10,19 +10,19 @@ class Bill2Controller extends ControllerBase {
 		$conditions = array();
 		$operator = $this->request->get('operator');
 		if ($operator) {
-			$conditions['$or']['operator'] = $operator;
+			$conditions['operator'] = $operator;
 		}
 		$countryISO = $this->request->get('countryISO');
 		if ($countryISO) {
-			$conditions['$or']['countryISO'] = $countryISO;
+			$conditions['countryISO'] = $countryISO;
 		}
 		$moContent = $this->request->get('moContent');
 		if ($moContent) {
-			$conditions['$or']['moContent'] = $moContent;
+			$conditions['moContent'] = $moContent;
 		}
 		$addtime = $this->request->get('addtime');
 		if ($addtime) {
-			$conditions['$or']['addtime'] = $addtime;
+			$conditions['addtime'] = $addtime;
 		}
 
 		$data = \Mo2::find(array(
