@@ -19,7 +19,7 @@ class Bill2Controller extends ControllerBase {
 		}
 		$moContent = $this->request->get('moContent');
 		if ($moContent) {
-			$conditions['moContent'] = $moContent;
+			$conditions['moContent'] =  new \MongoRegex("/".$moContent."/");
 		}
 		$addtime = $this->request->get('addtime');
 		if ($addtime) {
