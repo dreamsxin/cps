@@ -42,6 +42,7 @@
 										<span>推广数据明细</span>
 									</a>
 								</li>
+								<?php if ($this->session->get('group') == '超级管理员' || $this->session->get('group') == '管理员') { ?>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/cps/group') ?>">
 										<span>推广数据分组统计</span>
@@ -62,6 +63,7 @@
                                                                                 <span>推广数据清空</span>
                                                                         </a>
                                                                 </li>
+								<?php } ?>
 								<?php if ($this->session->get('group') == '超级管理员') { ?>
 								<li class="list-group-item">
 									<a href="<?= $this->url->get('manage/bill/index') ?>"><span>计费信息</span></a>
