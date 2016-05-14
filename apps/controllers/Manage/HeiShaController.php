@@ -2,7 +2,7 @@
 
 namespace Manage;
 
-class HeiShaController extends ControllerBase {
+class HeishaController extends ControllerBase {
 
 	public function moAction($page = 1) {
 		\Phalcon\Tag::appendTitle('计费Mo信息');
