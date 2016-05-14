@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+        <div class="panel-heading">计费信息</div>
+	<div class="panel-body">
+		<p><?php $this->flashSession->output() ?></p>
+		<form class="form" role="form" method="get">
+			<div class='row'>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label">渠道号D</label>
+						<input name="reference" type="text" value="<?= \Phalcon\Arr::get($_GET, 'reference') ?>">
+					</div>
+				</div>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-default">确定</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<table class="table">
+                <thead>
+                        <tr>
+                                <?php foreach ($labels as $label) { ?>
+                                        <th><?= $label ?></th>
+                                <?php } ?>
+                        </tr>
+                </thead>
+                <tbody>
+                        <?php
+                        foreach ($page->items as $item) {
+                        ?>
+                                <tr>
+				<?php foreach ($labels as $key => $label) { ?>
+					<td><?= $item->{$key} ?></td>
+				<?php } ?>
+                                </tr>
+                        <?php } ?>
+                </tbody>
+		<tr>
+			<?php foreach ($labels as $key => $label) { ?>
+				<td>
+				<?php
+					echo \Phalcon\Arr::get($totals, $key);
+				?>
+				</td>
+			<?php } ?>
+		</tr>
+	</table>
+</div>
+
