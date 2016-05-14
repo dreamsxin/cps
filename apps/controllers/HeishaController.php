@@ -1,6 +1,6 @@
 <?php
 
-class HeiShaController extends \Phalcon\Mvc\Controller {
+class HeishaController extends \Phalcon\Mvc\Controller {
 	
 	public function moAction() {
 		if ($this->request->isPost()) {
