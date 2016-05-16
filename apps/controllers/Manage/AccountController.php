@@ -27,7 +27,6 @@ class AccountController extends ControllerBase {
 				} else {
 					$this->error('密码修改失败');
 				}
-				
 			}
 		}
 	}
